@@ -20,11 +20,12 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 //store with persited reducer
 export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
-});
+  reducer:{
+    contacts:contactsReducer,
+    filter:filterReducer,
+  },
+  middleware:getDefaultMiddleware =>getDefaultMiddleware({
+    serializableCheck: {ignoredAction[FLUSH,REHYDRATE,PERSIST,PURGE,REGISTER]},
+  }),
+  })
 
-export const persistor = persistStore(store);
