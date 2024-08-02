@@ -1,5 +1,7 @@
 import { useState } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../../redux/contactsSlice.js';
+import { getContacts } from '../../redux/selectors.js';
 import css from './ContactForm.module.css';
 
 export const ContactForm = () => {
@@ -32,12 +34,13 @@ export const ContactForm = () => {
       alert(`${name} is already in contacts`);
       return;
     }
-    //   // Add Contact
-    addContact({
-      id: nanoid(),
-      name: name.trim(),
-      number: number.trim(),
-    });
+    dispatch(addContact(name, number));
+    // Add Contact
+    // addContact({
+    //   id: nanoid(),
+    //   name: name.trim(),
+    //   number: number.trim(),
+    // });
     // Reset Form Fields upon submitting
     setName('');
     setNumber('');
