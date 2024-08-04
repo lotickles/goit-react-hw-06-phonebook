@@ -1,25 +1,17 @@
-//action types =domain/action
-//describing the nature/what happens
-export const ADD_CONTACT = 'contacts/addcontacts';
-export const DELETE_CONTACT = 'contacts/deleteContacts';
-export const SET_FILTER = 'contacts/setFilter';
+import { createAction } from '@reduxjs/toolkit';
+import { nanoid } from 'nanoid';
 
-//action generators
-//will show the HOW the action of the objects
+export const addContact = createAction(
+  'contacts/addContact',
+  ({ name, number }) => ({
+    payload: {
+      id: nanoid(),
+      name,
+      number,
+    },
+  })
+);
 
-export const addContact = (name, number) => ({
-  type: ADD_CONTACT,
-  payload: {
-    id: nanoid(),
-    name,
-    number,
-  },
-});
-export const deleteContact = id => ({
-  type: DELETE_CONTACT,
-  payload: id,
-});
-export const setFilter = filter => ({
-  type: SET_FILTER,
-  payload: filter,
-});
+export const deleteContact = createAction('contacts/deleteContact');
+
+export const setFilter = createAction('filter/setFilter');
